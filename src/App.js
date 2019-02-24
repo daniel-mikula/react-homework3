@@ -32,6 +32,7 @@ class App extends Component {
                     {person.name}</td>
                   <td>{person.surname}</td>
                   <td>{person.phone}</td>
+                  <td><button>Toggle favorite</button></td>
                 </tr>
               );
             })}
