@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import AddPerson from './AddPerson'
 import './App.css';
 
 class App extends Component {
@@ -26,9 +27,25 @@ class App extends Component {
     });
   };
 
+  addNewPeople = (name, surname, phone) => {
+     
+      this.setState({
+        people: this.state.people.concat({
+          id: Date.now(),
+          name,
+          surname,
+          phone,
+          isFavorite: false
+        })
+      });
+    
+  };
+
+
   render() {
     return (
       <div className="App">
+      <AddPerson handleAddNew={this.addNewPeople} ></AddPerson>
         <table>
           <thead>
             <tr>
