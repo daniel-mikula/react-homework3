@@ -12,6 +12,20 @@ class App extends Component {
       .then(response => response.json())
       .then(people => this.setState({ people }));
   }
+
+  handleToggleFav = personId => {
+    this.setState({
+      people: this.state.people.map(person => {
+        return person.id === personId
+          ? {
+            ...person,
+            isFavorite: !person.isFavorite
+          }
+          : person;
+      })
+    });
+  };
+
   render() {
     return (
       <div className="App">
@@ -27,12 +41,12 @@ class App extends Component {
             {this.state.people.map(person => {
               return (
                 <tr key={person.id}
-                className={person.isFavorite ? "favorite" : ""}>
+                  className={person.isFavorite ? "favorite" : ""}>
                   <td>
                     {person.name}</td>
                   <td>{person.surname}</td>
                   <td>{person.phone}</td>
-                  <td><button>Toggle favorite</button></td>
+                  <td><button onClick={()=>this.handleToggleFav(person.id)}>Toggle favorite</button></td>
                 </tr>
               );
             })}
