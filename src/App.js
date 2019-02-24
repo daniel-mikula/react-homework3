@@ -26,7 +26,8 @@ class App extends Component {
           <tbody>
             {this.state.people.map(person => {
               return (
-                <tr key={person.id}>
+                <tr key={person.id}
+                className={person.isFavorite ? "favorite" : ""}>
                   <td>
                     {person.name}</td>
                   <td>{person.surname}</td>
