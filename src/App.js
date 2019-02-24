@@ -28,24 +28,29 @@ class App extends Component {
   };
 
   addNewPeople = (name, surname, phone) => {
-     
-      this.setState({
-        people: this.state.people.concat({
-          id: Date.now(),
-          name,
-          surname,
-          phone,
-          isFavorite: false
-        })
-      });
-    
+
+    this.setState({
+      people: this.state.people.concat({
+        id: Date.now(),
+        name,
+        surname,
+        phone,
+        isFavorite: false
+      })
+    });
+
   };
 
-
+  removePeople = personId => {
+    this.setState({
+      people: this.state.people.filter(person => person.id !== personId)
+    });
+  };
+  
   render() {
     return (
       <div className="App">
-      <AddPerson handleAddNew={this.addNewPeople} ></AddPerson>
+        <AddPerson handleAddNew={this.addNewPeople} ></AddPerson>
         <table>
           <thead>
             <tr>
@@ -59,11 +64,11 @@ class App extends Component {
               return (
                 <tr key={person.id}
                   className={person.isFavorite ? "favorite" : ""}>
-                  <td>
-                    {person.name}</td>
+                  <td>{person.name}</td>
                   <td>{person.surname}</td>
                   <td>{person.phone}</td>
-                  <td><button onClick={()=>this.handleToggleFav(person.id)}>Toggle favorite</button></td>
+                  <td><button onClick={() => this.handleToggleFav(person.id)}>Toggle favorite</button></td>
+                  <td><button onClick={() => this.removePeople(person.id)}>Remove</button></td>
                 </tr>
               );
             })}
